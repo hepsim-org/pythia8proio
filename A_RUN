@@ -1,0 +1,30 @@
+#!/bin/bash
+# Test scipt to create 10 ProIO files
+# S.Chekanov
+
+CURRENT_DIR=`pwd`
+
+#source ./setup.sh
+
+make -f Makefile
+
+XDIR="out/pythia8_qcdjets_pt50"
+mkdir -p $XDIR 
+
+NSYST=11
+n=1
+#------------------------------ start loop ----------------------------
+while  [ $n -lt $NSYST ]
+do
+echo "------------ Do run = $n" 
+  NUM=`printf "%03d" $n`
+  OUT="tev13_pythia8_qcdjets_pt50_$NUM.proio"
+  rm -f logfile.txt
+  echo "running.."
+  ./main.exe cards/tev13_pythia8_qcdjet_pt50.py pythia8.proio > logfile.txt
+  echo "file  $OUT done for run $n "
+  mv pythia8.proio  $XDIR/$OUT
+  let "n = $n + 1"
+done
+
+echo "Add is done"
