@@ -17,9 +17,6 @@ CLHEP
 ```
 
 Look at the Makefile. 
-In order to insert mc.proto (used to fill events), make sure your have a soft link "model" to the directory
-where mc.proto is located. 
-
 After compiling the code, run the test job "A_RUN" which creates 10 ProIO files inside the directory "out"
 
 
