@@ -155,17 +155,11 @@ int main(int argc, char* argv[]) {
 		kL=1000;
 	}
 
-
-
-	string model_file="mc.proto";
 	writer->PushMetadata("info:eCM",  (std::to_string(pythia.info.eCM())).c_str() );
 	writer->PushMetadata("info:idA",  (std::to_string(pythia.info.idA())).c_str() );
 	writer->PushMetadata("info:idB",  (std::to_string(pythia.info.idB())).c_str() );
-	writer->PushMetadata("info:model",  model_file.c_str() );
 	writer->PushMetadata("info:varint_energy",  (std::to_string(kEV)).c_str() );
 	writer->PushMetadata("info:varint_length",  (std::to_string(kL)).c_str() );
-
-
 
 	int ntot=0;
 	for (int n = 0; n < Ntot; n++) {
@@ -305,21 +299,6 @@ int main(int argc, char* argv[]) {
 	writer->PushMetadata("meta:events_ntried",  (std::to_string( pythia.info.nTried() )).c_str() );
 	writer->PushMetadata("meta:events",  (std::to_string( Ntot )).c_str() );
 	writer->PushMetadata("meta:events_requested",  (std::to_string( Ntot )).c_str() );
-
-
-
-	ifstream ifile2(("model/"+model_file).c_str());
-	if (ifile2) {
-		std::ifstream t(("model/"+model_file).c_str());
-		cout << "ProIO: Adding " << ("model/"+model_file).c_str() << endl;
-		std::stringstream buffer;
-		buffer << t.rdbuf();
-		writer->PushMetadata("meta:model.proto",  (buffer.str()).c_str() );
-	} else {
-		cout << "Warning: Missing " << ("model/"+model_file) << endl;
-	}
-
-
 
 
 
